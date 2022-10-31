@@ -8,7 +8,7 @@
     "vscode": "^1.55.0"
   },
   "repository": {
-    "url": "https://github.com/cydiacen/xb-frontend-extension"
+    "url": "https://github.com/liuyu-forever/xb-one-enough-plus.git"
   },
   "categories": [
     "Other"
@@ -26,9 +26,9 @@
     "menus": {
       "explorer/context": [
         {
-            "command": "extension.createVue3Component",
-            "when": "explorerResourceIsFolder",
-            "group": "navigation"
+          "command": "extension.createVue3Component",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation"
         }
       ],
       "editor/context": [
