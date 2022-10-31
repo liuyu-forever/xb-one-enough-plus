@@ -3,7 +3,7 @@
   "displayName": "XiaoBao One Enough Plus",
   "description": "just for xiaobao online frontend developer",
   "version": "0.1.10",
-  "publisher": "cydiacen",
+  "publisher": "xiaobaoDev",
   "engines": {
     "vscode": "^1.55.0"
   },
