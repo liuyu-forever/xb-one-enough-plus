@@ -1,0 +1,225 @@
+{
+  "name": "xb-one-enough-plus",
+  "displayName": "XiaoBao One Enough Plus",
+  "description": "just for xiaobao online frontend developer",
+  "version": "0.1.10",
+  "publisher": "cydiacen",
+  "engines": {
+    "vscode": "^1.55.0"
+  },
+  "repository": {
+    "url": "https://github.com/cydiacen/xb-frontend-extension"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "icon": "icon.jpg",
+  "galleryBanner": {
+    "color": "#241816",
+    "theme": "dark"
+  },
+  "main": "./extension",
+  "contributes": {
+    "menus": {
+      "explorer/context": [
+        {
+            "command": "extension.createVue3Component",
+            "when": "explorerResourceIsFolder",
+            "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "port.create",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "nodeDependencies.refreshEntry",
+          "when": "view == xbView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "nodeDependencies.editEntry",
+          "when": "view == xbView && viewItem == dependency",
+          "group": "inline"
+        },
+        {
+          "command": "extension.runScript",
+          "when": "view == xbView && viewItem == script",
+          "group": "inline"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "extension.createVue3Component",
+        "title": "Create Vue3 Component folder"
+      },
+      {
+        "command": "port.sync",
+        "title": "生成api"
+      },
+      {
+        "command": "port.create",
+        "title": "interface to Nest Class"
+      },
+      {
+        "command": "extension.scaningFile",
+        "title": "检索当前文件可能需要双语的文案",
+        "category": "sis"
+      },
+      {
+        "command": "extension.runScript",
+        "title": "执行命令行脚本",
+        "category": "sis"
+      },
+      {
+        "command": "nodeDependencies.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "nodeDependencies.addEntry",
+        "title": "Add"
+      },
+      {
+        "command": "nodeDependencies.editEntry",
+        "title": "Edit",
+        "icon": {
+          "light": "resources/light/edit.svg",
+          "dark": "resources/dark/edit.svg"
+        }
+      },
+      {
+        "command": "extension.runScript",
+        "title": "Run",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "xb-one-enough",
+          "title": "修改了setting文件记得点击刷新→",
+          "icon": "/media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "xb-one-enough": [
+        {
+          "id": "xbView",
+          "name": "School Pal Views"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "脚本分类设置",
+        "properties": {
+          "xbView.scriptMenu": {
+            "type": "array",
+            "default": [
+              {
+                "title": "NetCore版",
+                "nodes": [
+                  {
+                    "title": "生成api",
+                    "script": "node tools/create-api-netcore.js"
+                  },
+                  {
+                    "title": "生成枚举",
+                    "script": "node tools/create-enum-netcore.js"
+                  }
+                ]
+              },
+              {
+                "title": "TypeScript版",
+                "nodes": [
+                  {
+                    "title": "生成api",
+                    "script": "node tools/create-typeAPI.js"
+                  },
+                  {
+                    "title": "生成枚举",
+                    "script": "node tools/create-enum-type.js"
+                  }
+                ]
+              },
+              {
+                "title": "JS版",
+                "nodes": [
+                  {
+                    "title": "生成api",
+                    "script": "node tools/create-api.js"
+                  },
+                  {
+                    "title": "生成枚举",
+                    "script": "node tools/create-enum.js"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "build": "vsce package",
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "ajv": "^5.3.0",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "har-validator": "^5.0.3",
+    "http-signature": "^1.2.0",
+    "mocha": "^8.2.1",
+    "sshpk": "^1.13.1",
+    "typescript": "^4.1.3",
+    "vsce": "^1.94.0",
+    "vscode": "^1.1.37",
+    "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "@types/prettier": "^2.3.0",
+    "assert-plus": "^1.0.0",
+    "boom": "^7.1.1",
+    "cryptiles": "^4.1.1",
+    "iconv-lite": "^0.5.1",
+    "json-schema": "^0.2.3",
+    "jsprim": "^2.0.0",
+    "mime-db": "^1.31.0",
+    "prettier": "^2.3.0",
+    "request": "^2.83.0",
+    "sntp": "^3.0.1",
+    "sshpk": "^1.13.1",
+    "vscode-css-languageservice": "^2.1.11",
+    "vscode-languageserver-types": "^3.5.0"
+  }
+}
